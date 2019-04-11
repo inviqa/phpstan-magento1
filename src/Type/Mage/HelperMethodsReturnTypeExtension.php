@@ -17,7 +17,7 @@ class HelperMethodsReturnTypeExtension implements DynamicStaticMethodReturnTypeE
 {
     public function getClass(): string
     {
-        return Mage;
+        return Mage::class;
     }
 
     public function isStaticMethodSupported(MethodReflection $methodReflection): bool
