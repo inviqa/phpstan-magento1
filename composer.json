@@ -1,0 +1,14 @@
+{
+    "name": "inviqa/phpstan-magento1",
+    "description": "Extension for PHPStan to allow analysis of Magento 1 code.",
+    "type": "library",
+    "require": {
+        "phpstan/phpstan": "0.11.*"
+    },
+	"autoload": {
+		"psr-4": {
+			"PHPStanMagento1\\": "src/"
+		}
+	},
+    "license": "MIT"
+}

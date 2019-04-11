@@ -1,0 +1,18 @@
+parameters:
+    vendor_path: %currentWorkingDirectory%/vendor
+    paths:
+        - %currentWorkingDirectory%/public/app/code/local
+    bootstrap: %vendor_path%/inviqa/phpstan-magento1/phpstan-bootstrap.php
+    excludes_analyse:
+        - %currentWorkingDirectory%/public/app/code/local/*/*/data/*
+        - %currentWorkingDirectory%/public/app/code/local/*/*/sql/*
+
+services:
+    -
+        class: PHPStanMagento1\Type\Mage\HelperMethodsReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicStaticMethodReturnTypeExtension
+    -
+        class: PHPStanMagento1\Reflection\Varien\Object\MagicMethodsReflectionExtension
+        tags:
+            - phpstan.broker.methodsClassReflectionExtension
