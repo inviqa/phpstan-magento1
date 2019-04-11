@@ -22,13 +22,13 @@ Whilst this extension depends on phpstan/phpstan, it can also depend on phpstan/
 With coupled dependencies:
 
 ```bash
-composer require inviqa/phpstan-magento2 phpstan/phpstan
+composer require inviqa/phpstan-magento1 phpstan/phpstan
 ```
 
 With uncoupled phar package:
 
 ```bash
-composer require inviqa/phpstan-magento2 phpstan/phpstan-shim
+composer require inviqa/phpstan-magento1 phpstan/phpstan-shim
 ```
 
 ## Alternative Magento path
