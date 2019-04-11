@@ -2,7 +2,7 @@
 
 namespace PHPStanMagento1\Type\Mage;
 
-use PhpParser\Node\Expr\StaticCall;
+use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
@@ -13,14 +13,15 @@ use PHPStan\Type\Type;
 
 use Mage_Core_Model_Layout;
 
+
 class HelperMethodsReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
     public function getClass(): string
     {
-        return Mage_Core_Model_Layout;
+        return Mage_Core_Model_Layout::class;
     }
 
-    public function isStaticMethodSupported(MethodReflection $methodReflection): bool
+    public function isMethodSupported(MethodReflection $methodReflection): bool
     {
         return in_array(
             $methodReflection->getName(),
@@ -31,7 +32,7 @@ class HelperMethodsReturnTypeExtension implements DynamicMethodReturnTypeExtensi
         );
     }
 
-    public function getTypeFromStaticMethodCall(MethodReflection $methodReflection, StaticCall $methodCall, Scope $scope): Type
+    public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
     {
         if (!isset($methodCall->args[0]) || !$methodCall->args[0]->value instanceof String_) {
             throw new ShouldNotHappenException();
