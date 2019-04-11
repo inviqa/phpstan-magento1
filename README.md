@@ -48,12 +48,6 @@ parameters:
 
 # Known Issues
 
-## Controllers aren't autoloaded
-
-This will be looked at first.
-
-Currently you can workaround this by adding the controller patch to phpstan configuration parameters.autoload_directories
-
 ## Data/SQL scripts can't be tested
 
 Since these scripts use a presumed $this variable due to being included from a setup class, work is needed to:
