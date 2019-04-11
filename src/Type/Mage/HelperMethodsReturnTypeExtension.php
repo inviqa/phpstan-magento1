@@ -54,7 +54,7 @@ class HelperMethodsReturnTypeExtension implements DynamicStaticMethodReturnTypeE
                 return $config->getModelClassName($name);
             case 'getResourceModel':
             case 'getResourceSingleton':
-                return $config->getModelClassName($name);
+                return $config->getResourceModelClassName($name);
             case 'helper':
                 return $config->getHelperClassName($name);
         }
