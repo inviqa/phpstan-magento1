@@ -2,7 +2,7 @@
 
 Extension for [PHPStan](https://github.com/phpstan/phpstan) to allow analysis of Magento 1 code.
 
-Currently it assumes Magento is installed in the public/ directory of the project root. Further work is needed in phpstan itself to allow more intellegence for extensions to be more customised whilst working also with phpstan/phpstan-shim.
+Currently it assumes Magento is installed in the public/ directory of the project root. Further work is needed in phpstan itself to allow more intellegence for extensions to be more customised whilst working with both phpstan/phpstan and phpstan/phpstan-shim.
 
 By default phpstan with this extension will test public/app/code/local only.
 
@@ -14,7 +14,7 @@ Make sure it has
 
 ```neon
 includes:
-	- vendor/inviqa/phpstan-magento1/extension.neon
+    - vendor/inviqa/phpstan-magento1/extension.neon
 ```
 
 Whilst this extension depends on phpstan/phpstan, it can also depend on phpstan/phpstan-shim, which decouples its dependencies from the project's own use of them.
@@ -31,13 +31,28 @@ With uncoupled phar package:
 composer require inviqa/phpstan-magento2 phpstan/phpstan-shim
 ```
 
+## Alternative Magento path
+
+Add to the project's phpstan.neon:
+
+```neon
+parameters:
+    paths:
+        - %currentWorkingDirectory%/path/to/magento/app/code/local
+    excludes_analyse:
+        - %currentWorkingDirectory%/path/to/magento/app/code/local/*/*/data/*
+        - %currentWorkingDirectory%/path/to/magento/app/code/local/*/*/sql/*
+    autoload_files:
+        - %currentWorkingDirectory%/path/to/magento/app/Mage.php
+```
+
 # Known Issues
 
 ## Controllers aren't autoloaded
 
 This will be looked at first.
 
-Currently you can workaround this by using phpstan configuration parameters.autoload_directories
+Currently you can workaround this by adding the controller patch to phpstan configuration parameters.autoload_directories
 
 ## Data/SQL scripts can't be tested
 
