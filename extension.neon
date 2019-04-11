@@ -9,10 +9,14 @@ parameters:
 
 services:
     -
-        class: PHPStanMagento1\Type\Mage\HelperMethodsReturnTypeExtension
-        tags:
-            - phpstan.broker.dynamicStaticMethodReturnTypeExtension
-    -
         class: PHPStanMagento1\Reflection\Varien\Object\MagicMethodsReflectionExtension
         tags:
             - phpstan.broker.methodsClassReflectionExtension
+    -
+        class: PHPStanMagento1\Type\Mage\Core\Model\Layout\HelperMethodsReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: PHPStanMagento1\Type\Mage\HelperMethodsReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicStaticMethodReturnTypeExtension
