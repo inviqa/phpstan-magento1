@@ -10,6 +10,11 @@ use PHPStan\Reflection\TrivialParametersAcceptor;
 class MagicMethodReflection implements MethodReflection
 {
     /**
+     * @var string
+     */
+    private $name;
+
+    /**
      * @var ClassReflection
      */
     private $declaringClass;

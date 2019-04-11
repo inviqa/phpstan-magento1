@@ -5,10 +5,18 @@
     "require": {
         "phpstan/phpstan": "0.11.*"
     },
-	"autoload": {
-		"psr-4": {
-			"PHPStanMagento1\\": "src/"
-		}
-	},
+    "autoload": {
+        "psr-4": {
+            "PHPStanMagento1\\": "src/"
+        }
+    },
+    "scripts": {
+        "test-quality": [
+            "phpstan analyse"
+        ],
+        "test": [
+            "@test-quality"
+        ]
+    },
     "license": "MIT"
 }

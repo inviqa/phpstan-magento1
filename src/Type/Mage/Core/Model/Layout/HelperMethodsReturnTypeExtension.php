@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPStanMagento1\Type\Mage;
+namespace PHPStanMagento1\Type\Mage\Core\Model\Layout;
 
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Scalar\String_;
@@ -11,6 +11,7 @@ use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 
+use Mage;
 use Mage_Core_Model_Layout;
 
 
