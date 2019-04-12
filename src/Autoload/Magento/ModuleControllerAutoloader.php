@@ -6,7 +6,7 @@ use Mage;
 use ReflectionClass;
 use Exception;
 
-class ModuleControllerAutoLoader
+class ModuleControllerAutoloader
 {
     /**
      * @var string
