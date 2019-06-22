@@ -1,45 +1,42 @@
 <?php
 
-namespace PHPStanMagento1\Type\Mage;
+namespace PHPStanMagento1\Type\Mage\Core\Block\Abstract_;
 
-use PhpParser\Node\Expr\StaticCall;
+use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\ShouldNotHappenException;
-use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
+use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 
 use Mage;
+use Mage_Core_Block_Abstract;
 
 /**
  * Class HelperMethodsReturnTypeExtension
- * @package PHPStanMagento1\Type\Mage
+ * @package PHPStanMagento1\Type\Mage\Core\Block\Abstract_
  */
-class HelperMethodsReturnTypeExtension implements DynamicStaticMethodReturnTypeExtension
+class HelperMethodsReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
     /**
      * @return string
      */
     public function getClass(): string
     {
-        return Mage::class;
+        return Mage_Core_Block_Abstract::class;
     }
 
     /**
      * @param MethodReflection $methodReflection
      * @return bool
      */
-    public function isStaticMethodSupported(MethodReflection $methodReflection): bool
+    public function isMethodSupported(MethodReflection $methodReflection): bool
     {
         return in_array(
             $methodReflection->getName(),
             [
-                'getModel',
-                'getResourceModel',
-                'getResourceSingleton',
-                'getSingleton',
                 'helper',
             ]
         );
@@ -47,12 +44,12 @@ class HelperMethodsReturnTypeExtension implements DynamicStaticMethodReturnTypeE
 
     /**
      * @param MethodReflection $methodReflection
-     * @param StaticCall $methodCall
+     * @param MethodCall $methodCall
      * @param Scope $scope
      * @return Type
      * @throws ShouldNotHappenException
      */
-    public function getTypeFromStaticMethodCall(MethodReflection $methodReflection, StaticCall $methodCall, Scope $scope): Type
+    public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
     {
         if (!isset($methodCall->args[0]) || !$methodCall->args[0]->value instanceof String_) {
             throw new ShouldNotHappenException();
@@ -66,19 +63,13 @@ class HelperMethodsReturnTypeExtension implements DynamicStaticMethodReturnTypeE
     /**
      * @param string $method
      * @param string $name
-     * @return false|string
+     * @return string
      * @throws ShouldNotHappenException
      */
     private function getClassFromHelperMethod($method, $name)
     {
         $config = Mage::getConfig();
         switch ($method) {
-            case 'getModel':
-            case 'getSingleton':
-                return $config->getModelClassName($name);
-            case 'getResourceModel':
-            case 'getResourceSingleton':
-                return $config->getResourceModelClassName($name);
             case 'helper':
                 return $config->getHelperClassName($name);
         }
