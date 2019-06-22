@@ -13,6 +13,14 @@ services:
         tags:
             - phpstan.broker.methodsClassReflectionExtension
     -
+        class: PHPStanMagento1\Type\Mage\Core\Block\Abstract_\HelperMethodsReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: PHPStanMagento1\Type\Mage\Core\Model\Factory\HelperMethodsReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
         class: PHPStanMagento1\Type\Mage\Core\Model\Layout\HelperMethodsReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension

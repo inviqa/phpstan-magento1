@@ -39,21 +39,22 @@ Add to the project's phpstan.neon:
 parameters:
     paths:
         - %currentWorkingDirectory%/path/to/magento/app/code/local
-    excludes_analyse:
-        - %currentWorkingDirectory%/path/to/magento/app/code/local/*/*/data/*
-        - %currentWorkingDirectory%/path/to/magento/app/code/local/*/*/sql/*
     autoload_files:
         - %currentWorkingDirectory%/path/to/magento/app/Mage.php
+    ignoreErrors:
+        -
+            message: '#Undefined variable: \$this#'
+            paths:
+                - %currentWorkingDirectory%/path/to/magento/app/code/*/*/*/data/*
+                - %currentWorkingDirectory%/path/to/magento/app/code/*/*/*/sql/*
+        -
+            message: '#Using \$this outside a class.#'
+            paths:
+                - %currentWorkingDirectory%/path/to/magento/app/code/*/*/*/data/*
+                - %currentWorkingDirectory%/path/to/magento/app/code/*/*/*/sql/*
 ```
 
 # Known Issues
-
-## Data/SQL scripts can't be tested
-
-Since these scripts use a presumed $this variable due to being included from a setup class, work is needed to:
-
-* work out the correct setup class
-* somehow make phpstan aware of it for the file
 
 ## Magento fluent interface classes aren't fluent for sub-classes
 

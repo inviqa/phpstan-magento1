@@ -6,6 +6,10 @@ use Mage;
 use ReflectionClass;
 use Exception;
 
+/**
+ * Class ModuleControllerAutoloader
+ * @package PHPStanMagento1\Autoload\Magento
+ */
 class ModuleControllerAutoloader
 {
     /**
@@ -15,6 +19,12 @@ class ModuleControllerAutoloader
 
     private $codePool;
 
+    /**
+     * ModuleControllerAutoloader constructor.
+     * @param string $codePool
+     * @param string|null $magentoRoot
+     * @throws \ReflectionException
+     */
     public function __construct($codePool, $magentoRoot = null)
     {
         if (empty($magentRoot)) {
@@ -34,6 +44,9 @@ class ModuleControllerAutoloader
         spl_autoload_register([$this, 'autoload']);
     }
 
+    /**
+     * @param string $className
+     */
     public function autoload($className)
     {
         if (preg_match('/^([a-zA-Z0-9\x7f-\xff]*)_([a-zA-Z0-9\x7f-\xff]*)_([a-zA-Z0-9_\x7f-\xff]+)/', $className, $match) === 1) {
