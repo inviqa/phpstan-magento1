@@ -9,13 +9,13 @@ use PHPStan\Reflection\MethodsClassReflectionExtension;
 
 use Varien_Object;
 
-class MagicMethodsReflectionExtension implements MethodsClassReflectionExtension
+final class MagicMethodsReflectionExtension implements MethodsClassReflectionExtension
 {
     public function hasMethod(ClassReflection $classReflection, string $methodName): bool
     {
         $magentoMagicMethods = ['get', 'set', 'uns', 'has'];
         return $classReflection->isSubclassOf(Varien_Object::class)
-            && in_array(substr($methodName, 0, 3), $magentoMagicMethods);
+            && \in_array(substr($methodName, 0, 3), $magentoMagicMethods, true);
     }
 
     public function getMethod(ClassReflection $classReflection, string $methodName): MethodReflection

@@ -8,16 +8,12 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\TrivialParametersAcceptor;
 
-class MagicMethodReflection implements MethodReflection
+final class MagicMethodReflection implements MethodReflection
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $name;
 
-    /**
-     * @var ClassReflection
-     */
+    /** @var ClassReflection */
     private $declaringClass;
 
     public function __construct(ClassReflection $declaringClass, string $name)
@@ -56,13 +52,13 @@ class MagicMethodReflection implements MethodReflection
         return $this->name;
     }
 
-	/**
-	 * @return \PHPStan\Reflection\ParametersAcceptor[]
-	 */
-	public function getVariants(): array
-	{
-		return [
-			new TrivialParametersAcceptor(),
-		];
-	}
+    /**
+     * @return \PHPStan\Reflection\ParametersAcceptor[]
+     */
+    public function getVariants(): array
+    {
+        return [
+            new TrivialParametersAcceptor(),
+        ];
+    }
 }

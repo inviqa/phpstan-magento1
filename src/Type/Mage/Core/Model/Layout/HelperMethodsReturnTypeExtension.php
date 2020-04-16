@@ -15,8 +15,7 @@ use PHPStan\Type\Type;
 use Mage;
 use Mage_Core_Model_Layout;
 
-
-class HelperMethodsReturnTypeExtension implements DynamicMethodReturnTypeExtension
+final class HelperMethodsReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
     public function getClass(): string
     {
@@ -25,7 +24,7 @@ class HelperMethodsReturnTypeExtension implements DynamicMethodReturnTypeExtensi
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return in_array(
+        return \in_array(
             $methodReflection->getName(),
             [
                 'getBlockSingleton',
@@ -34,6 +33,9 @@ class HelperMethodsReturnTypeExtension implements DynamicMethodReturnTypeExtensi
         );
     }
 
+    /**
+     * @throws \PHPStan\ShouldNotHappenException
+     */
     public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
     {
         if (!isset($methodCall->args[0]) || !$methodCall->args[0]->value instanceof String_) {
@@ -45,7 +47,10 @@ class HelperMethodsReturnTypeExtension implements DynamicMethodReturnTypeExtensi
         return new ObjectType($class);
     }
 
-    private function getClassFromHelperMethod($method, $name)
+    /**
+     * @throws \PHPStan\ShouldNotHappenException
+     */
+    private function getClassFromHelperMethod(string $method, string $name): string
     {
         $config = Mage::getConfig();
         switch ($method) {
@@ -54,6 +59,7 @@ class HelperMethodsReturnTypeExtension implements DynamicMethodReturnTypeExtensi
             case 'helper':
                 return $config->getHelperClassName($name);
         }
+
         throw new ShouldNotHappenException();
     }
 }

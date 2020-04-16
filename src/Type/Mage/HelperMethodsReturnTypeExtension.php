@@ -15,7 +15,7 @@ use PHPStan\Type\Type;
 
 use Mage;
 
-class HelperMethodsReturnTypeExtension implements DynamicStaticMethodReturnTypeExtension
+final class HelperMethodsReturnTypeExtension implements DynamicStaticMethodReturnTypeExtension
 {
     public function getClass(): string
     {
@@ -24,7 +24,7 @@ class HelperMethodsReturnTypeExtension implements DynamicStaticMethodReturnTypeE
 
     public function isStaticMethodSupported(MethodReflection $methodReflection): bool
     {
-        return in_array(
+        return \in_array(
             $methodReflection->getName(),
             [
                 'getModel',
@@ -36,6 +36,9 @@ class HelperMethodsReturnTypeExtension implements DynamicStaticMethodReturnTypeE
         );
     }
 
+    /**
+     * @throws \PHPStan\ShouldNotHappenException
+     */
     public function getTypeFromStaticMethodCall(MethodReflection $methodReflection, StaticCall $methodCall, Scope $scope): Type
     {
         if (!isset($methodCall->args[0]) || !$methodCall->args[0]->value instanceof String_) {
@@ -52,7 +55,10 @@ class HelperMethodsReturnTypeExtension implements DynamicStaticMethodReturnTypeE
         return new ObjectType($class);
     }
 
-    private function getClassFromHelperMethod($method, $name)
+    /**
+     * @throws \PHPStan\ShouldNotHappenException
+     */
+    private function getClassFromHelperMethod(string $method, string $name)
     {
         $config = Mage::getConfig();
         switch ($method) {
@@ -65,6 +71,7 @@ class HelperMethodsReturnTypeExtension implements DynamicStaticMethodReturnTypeE
             case 'helper':
                 return $config->getHelperClassName($name);
         }
+
         throw new ShouldNotHappenException();
     }
 }
