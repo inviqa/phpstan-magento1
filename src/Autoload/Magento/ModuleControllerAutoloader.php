@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace PHPStanMagento1\Autoload\Magento;
 
@@ -17,7 +18,7 @@ class ModuleControllerAutoloader
 
     public function __construct($codePool, $magentoRoot = null)
     {
-        if (empty($magentRoot)) {
+        if (empty($magentoRoot)) {
             $mageClass = new ReflectionClass(Mage::class);
             if ($mageClass->getFileName() !== false) {
                 $magentoRoot = dirname($mageClass->getFileName(), 2);
@@ -37,7 +38,8 @@ class ModuleControllerAutoloader
     public function autoload($className)
     {
         if (preg_match('/^([a-zA-Z0-9\x7f-\xff]*)_([a-zA-Z0-9\x7f-\xff]*)_([a-zA-Z0-9_\x7f-\xff]+)/', $className, $match) === 1) {
-            $controllerFilename = sprintf('%s/app/code/%s/%s/%s/controllers/%s.php', $this->magentoRoot, $this->codePool, $match[1], $match[2], $match[3]);
+            $class = str_replace('_', '/', $match[3]);
+            $controllerFilename = sprintf('%s/app/code/%s/%s/%s/controllers/%s.php', $this->magentoRoot, $this->codePool, $match[1], $match[2], $class);
             if (file_exists($controllerFilename)) {
                 (function ($file) {
                     include $file;

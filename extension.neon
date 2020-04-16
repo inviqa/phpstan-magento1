@@ -1,11 +1,11 @@
 parameters:
     vendor_path: %currentWorkingDirectory%/vendor
-    paths:
-        - %currentWorkingDirectory%/public/app/code/local
-    bootstrap: %vendor_path%/inviqa/phpstan-magento1/phpstan-bootstrap.php
+    bootstrap: %vendor_path%/vianetz/phpstan-magento1/phpstan-bootstrap.php
     excludes_analyse:
-        - %currentWorkingDirectory%/public/app/code/local/*/*/data/*
-        - %currentWorkingDirectory%/public/app/code/local/*/*/sql/*
+        - %currentWorkingDirectory%/htdocs/app/code/local/*/*/data/*
+        - %currentWorkingDirectory%/htdocs/app/code/local/*/*/sql/*
+    autoload_files:
+        - %currentWorkingDirectory%/htdocs/app/Mage.php
 
 services:
     -

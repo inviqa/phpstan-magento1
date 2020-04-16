@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace PHPStanMagento1\Type\Mage;
 
@@ -8,6 +9,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
+use PHPStan\Type\NullType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 
@@ -42,6 +44,11 @@ class HelperMethodsReturnTypeExtension implements DynamicStaticMethodReturnTypeE
 
         $name = $methodCall->args[0]->value->value;
         $class = $this->getClassFromHelperMethod($methodReflection->getName(), $name);
+
+        if ($class === false) {
+            return new NullType();
+        }
+
         return new ObjectType($class);
     }
 

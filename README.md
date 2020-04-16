@@ -4,8 +4,6 @@ Extension for [PHPStan](https://github.com/phpstan/phpstan) to allow analysis of
 
 Currently it assumes Magento is installed in the public/ directory of the project root. Further work is needed in phpstan itself to allow more intellegence for extensions to be more customised whilst working with both phpstan/phpstan and phpstan/phpstan-shim.
 
-By default phpstan with this extension will test public/app/code/local only.
-
 ## Usage
 
 Add `phpstan.neon` to your Magento 1 project.
@@ -32,6 +30,8 @@ composer require inviqa/phpstan-magento1 phpstan/phpstan-shim
 ```
 
 ## Alternative Magento path
+
+By default this extension assumes the Magento directory is `%currentWorkingDirectory%/htdocs`.
 
 Add to the project's phpstan.neon:
 
