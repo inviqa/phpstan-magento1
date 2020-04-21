@@ -2,8 +2,8 @@ parameters:
     vendor_path: %currentWorkingDirectory%/vendor
     bootstrap: %vendor_path%/vianetz/phpstan-magento1/phpstan-bootstrap.php
     excludes_analyse:
-        - %currentWorkingDirectory%/htdocs/app/code/local/*/*/data/*
-        - %currentWorkingDirectory%/htdocs/app/code/local/*/*/sql/*
+        - */app/code/local/*/*/data/*
+        - */app/code/local/*/*/sql/*
     autoload_files:
         - %currentWorkingDirectory%/htdocs/app/Mage.php
 
@@ -13,10 +13,26 @@ services:
         tags:
             - phpstan.broker.methodsClassReflectionExtension
     -
-        class: PHPStanMagento1\Type\Mage\Core\Model\Layout\HelperMethodsReturnTypeExtension
+        class: PHPStanMagento1\Type\Mage\CoreModelLayout\Helper
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
     -
-        class: PHPStanMagento1\Type\Mage\HelperMethodsReturnTypeExtension
+        class: PHPStanMagento1\Type\Mage\CoreModelLayout\GetBlockSingleton
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: PHPStanMagento1\Type\Mage\GetModel
+        tags:
+            - phpstan.broker.dynamicStaticMethodReturnTypeExtension
+    -
+        class: PHPStanMagento1\Type\Mage\GetResourceModel
+        tags:
+            - phpstan.broker.dynamicStaticMethodReturnTypeExtension
+    -
+        class: PHPStanMagento1\Type\Mage\GetSingleton
+        tags:
+            - phpstan.broker.dynamicStaticMethodReturnTypeExtension
+    -
+        class: PHPStanMagento1\Type\Mage\Helper
         tags:
             - phpstan.broker.dynamicStaticMethodReturnTypeExtension

@@ -10,5 +10,3 @@ use PHPStanMagento1\Autoload\Magento\ModuleControllerAutoloader;
 // workaround Magento's use of date phpdoc typehint for string type
 // better would be to implement the typehint to make it appear string type
 class date {}
-
-Mage::app();

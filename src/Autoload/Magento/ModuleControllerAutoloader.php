@@ -33,7 +33,7 @@ final class ModuleControllerAutoloader
         spl_autoload_register([$this, 'autoload']);
     }
 
-    public function autoload($className): void
+    public function autoload(string $className): void
     {
         if (preg_match('/^([a-zA-Z0-9\x7f-\xff]*)_([a-zA-Z0-9\x7f-\xff]*)_([a-zA-Z0-9_\x7f-\xff]+)/', $className, $match) === 1) {
             $class = str_replace('_', '/', $match[3]);
