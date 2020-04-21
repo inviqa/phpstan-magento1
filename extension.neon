@@ -1,6 +1,5 @@
 parameters:
-    vendor_path: %currentWorkingDirectory%/vendor
-    bootstrap: %vendor_path%/vianetz/phpstan-magento1/phpstan-bootstrap.php
+    bootstrap: %currentWorkingDirectory%/vendor/vianetz/phpstan-magento1/phpstan-bootstrap.php
     excludes_analyse:
         - */app/code/local/*/*/data/*
         - */app/code/local/*/*/sql/*

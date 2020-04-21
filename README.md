@@ -1,8 +1,8 @@
-# phpstan-magento1 extension
+# PHPStan Extension for Magento 1
 
 Extension for [PHPStan](https://github.com/phpstan/phpstan) to allow analysis of Magento 1 code.
 
-Currently it assumes Magento is installed in the public/ directory of the project root. Further work is needed in phpstan itself to allow more intellegence for extensions to be more customised whilst working with both phpstan/phpstan and phpstan/phpstan-shim.
+Currently it assumes Magento is installed in the `htdocs/` directory of the project root. Further work is needed in phpstan itself to allow more intellegence for extensions to be more customised whilst working with both phpstan/phpstan and phpstan/phpstan-shim.
 
 ## Usage
 
@@ -12,21 +12,13 @@ Make sure it has
 
 ```neon
 includes:
-    - vendor/inviqa/phpstan-magento1/extension.neon
+    - vendor/vianetz/phpstan-magento1/extension.neon
 ```
 
-Whilst this extension depends on phpstan/phpstan, it can also depend on phpstan/phpstan-shim, which decouples its dependencies from the project's own use of them.
-
-With coupled dependencies:
+Then run
 
 ```bash
 composer require inviqa/phpstan-magento1 phpstan/phpstan
-```
-
-With uncoupled phar package:
-
-```bash
-composer require inviqa/phpstan-magento1 phpstan/phpstan-shim
 ```
 
 ## Alternative Magento path
@@ -39,9 +31,6 @@ Add to the project's phpstan.neon:
 parameters:
     paths:
         - %currentWorkingDirectory%/path/to/magento/app/code/local
-    excludes_analyse:
-        - %currentWorkingDirectory%/path/to/magento/app/code/local/*/*/data/*
-        - %currentWorkingDirectory%/path/to/magento/app/code/local/*/*/sql/*
     autoload_files:
         - %currentWorkingDirectory%/path/to/magento/app/Mage.php
 ```
