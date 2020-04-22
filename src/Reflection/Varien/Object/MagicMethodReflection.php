@@ -69,7 +69,7 @@ final class MagicMethodReflection implements MethodReflection
 
     public function isDeprecated(): \PHPStan\TrinaryLogic
     {
-        return \PHPStan\TrinaryLogic::createNo();
+        return \PHPStan\TrinaryLogic::createMaybe();
     }
 
     public function getDeprecatedDescription(): ?string
@@ -84,7 +84,7 @@ final class MagicMethodReflection implements MethodReflection
 
     public function isInternal(): \PHPStan\TrinaryLogic
     {
-        return \PHPStan\TrinaryLogic::createNo();
+        return \PHPStan\TrinaryLogic::createMaybe();
     }
 
     public function getThrowType(): ?\PHPStan\Type\Type
@@ -94,6 +94,6 @@ final class MagicMethodReflection implements MethodReflection
 
     public function hasSideEffects(): \PHPStan\TrinaryLogic
     {
-        return \PHPStan\TrinaryLogic::createNo();
+        return \PHPStan\TrinaryLogic::createMaybe();
     }
 }

@@ -14,7 +14,7 @@ final class MagicMethodsReflectionExtension implements MethodsClassReflectionExt
     public function hasMethod(ClassReflection $classReflection, string $methodName): bool
     {
         $magentoMagicMethods = ['get', 'set', 'uns', 'has'];
-        return $classReflection->isSubclassOf(Varien_Object::class)
+        return ($classReflection->isSubclassOf(Varien_Object::class) || $classReflection->getName() === Varien_Object::class)
             && \in_array(substr($methodName, 0, 3), $magentoMagicMethods, true);
     }
 
